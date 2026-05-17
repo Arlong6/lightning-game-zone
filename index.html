@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lightning Game Zone</title>
+	<meta name="description" content="A free indie game collection by arlong. Built one weekend at a time.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #04060e;
+			--bg-card: #0a1024;
+			--bg-card-hover: #131c3a;
+			--accent: #ffd24a;
+			--accent-secondary: #7ac8ff;
+			--text: #e0e8f0;
+			--text-dim: #6a809a;
+			--border: #1a2848;
+			--coming-soon: #2a3a56;
+		}
+		* { box-sizing: border-box; }
+		html, body {
+			margin: 0;
+			padding: 0;
+			background: var(--bg);
+			color: var(--text);
+			font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+			min-height: 100vh;
+		}
+		body {
+			background-image:
+				radial-gradient(ellipse at top, rgba(122,200,255,0.05), transparent 70%),
+				radial-gradient(ellipse at bottom, rgba(255,210,74,0.04), transparent 60%);
+		}
+		.scanlines {
+			position: fixed;
+			top: 0; left: 0;
+			width: 100vw; height: 100vh;
+			pointer-events: none;
+			background: repeating-linear-gradient(
+				to bottom,
+				rgba(255,255,255,0.02) 0,
+				rgba(255,255,255,0.02) 1px,
+				transparent 1px,
+				transparent 3px
+			);
+			z-index: 1;
+		}
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 60px 24px 80px;
+			position: relative;
+			z-index: 2;
+		}
+		header {
+			text-align: center;
+			margin-bottom: 56px;
+		}
+		.bolt {
+			display: inline-block;
+			font-size: 48px;
+			color: var(--accent);
+			text-shadow: 0 0 12px rgba(255,210,74,0.6);
+			margin-bottom: 8px;
+		}
+		h1 {
+			font-size: 36px;
+			font-weight: 700;
+			letter-spacing: 4px;
+			margin: 0;
+			color: var(--accent);
+			text-shadow: 0 0 16px rgba(255,210,74,0.3);
+		}
+		.subtitle {
+			font-size: 13px;
+			color: var(--text-dim);
+			letter-spacing: 2px;
+			margin-top: 12px;
+		}
+		.divider {
+			width: 60px;
+			height: 2px;
+			background: var(--accent);
+			margin: 24px auto 0;
+			opacity: 0.5;
+		}
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			gap: 24px;
+			margin-top: 32px;
+		}
+		.card {
+			background: var(--bg-card);
+			border: 1px solid var(--border);
+			border-radius: 4px;
+			overflow: hidden;
+			transition: all 0.2s ease;
+			display: flex;
+			flex-direction: column;
+		}
+		.card.playable:hover {
+			border-color: var(--accent);
+			background: var(--bg-card-hover);
+			transform: translateY(-4px);
+			box-shadow: 0 6px 24px rgba(255,210,74,0.15);
+		}
+		.card-thumb {
+			aspect-ratio: 16/9;
+			background: #000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			overflow: hidden;
+			border-bottom: 1px solid var(--border);
+		}
+		.thumb-voltline {
+			background:
+				radial-gradient(circle at 30% 40%, rgba(122,200,255,0.3), transparent 60%),
+				radial-gradient(circle at 70% 60%, rgba(255,210,74,0.2), transparent 60%),
+				linear-gradient(135deg, #0a0518 0%, #1a0c2e 100%);
+		}
+		.thumb-voltline::before {
+			content: "VOLTLINE";
+			position: absolute;
+			color: var(--accent);
+			font-size: 28px;
+			font-weight: 700;
+			letter-spacing: 4px;
+			text-shadow: 0 0 16px rgba(255,210,74,0.6);
+		}
+		.thumb-voltline::after {
+			content: "電光";
+			position: absolute;
+			bottom: 14px;
+			color: var(--accent-secondary);
+			font-size: 11px;
+			letter-spacing: 4px;
+			opacity: 0.7;
+		}
+		.thumb-coming {
+			background:
+				repeating-linear-gradient(
+					45deg,
+					#0a1024 0,
+					#0a1024 10px,
+					#0d1430 10px,
+					#0d1430 20px
+				);
+			color: var(--coming-soon);
+			font-size: 22px;
+			font-weight: 700;
+			letter-spacing: 6px;
+		}
+		.card-body {
+			padding: 16px 18px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+		.card-title {
+			font-size: 15px;
+			font-weight: 700;
+			color: var(--text);
+			margin: 0 0 6px 0;
+			letter-spacing: 1px;
+		}
+		.card-tagline {
+			font-size: 11px;
+			color: var(--text-dim);
+			line-height: 1.5;
+			margin: 0;
+			min-height: 32px;
+		}
+		.card.coming-soon .card-title {
+			color: var(--coming-soon);
+		}
+		.card-actions {
+			margin-top: 14px;
+		}
+		.play-btn {
+			display: inline-block;
+			background: var(--accent);
+			color: #1a1208;
+			padding: 8px 18px;
+			font-family: inherit;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 2px;
+			text-decoration: none;
+			border-radius: 2px;
+			transition: all 0.15s ease;
+		}
+		.play-btn:hover {
+			background: #fff;
+			box-shadow: 0 0 12px rgba(255,210,74,0.5);
+		}
+		.coming-tag {
+			display: inline-block;
+			color: var(--coming-soon);
+			font-size: 11px;
+			letter-spacing: 3px;
+			font-weight: 700;
+		}
+		footer {
+			margin-top: 72px;
+			padding-top: 24px;
+			border-top: 1px solid var(--border);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 11px;
+			color: var(--text-dim);
+			letter-spacing: 1px;
+		}
+		footer a {
+			color: var(--accent-secondary);
+			text-decoration: none;
+		}
+		footer a:hover {
+			color: var(--accent);
+		}
+		@media (max-width: 600px) {
+			.container { padding: 36px 16px 48px; }
+			h1 { font-size: 28px; letter-spacing: 3px; }
+			.bolt { font-size: 36px; }
+			footer { flex-direction: column; gap: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="scanlines"></div>
+	<div class="container">
+		<header>
+			<div class="bolt">⚡</div>
+			<h1>LIGHTNING GAME ZONE</h1>
+			<div class="subtitle">A free indie game collection · built one weekend at a time</div>
+			<div class="divider"></div>
+		</header>
+
+		<main class="grid">
+			<article class="card playable">
+				<div class="card-thumb thumb-voltline"></div>
+				<div class="card-body">
+					<h2 class="card-title">VOLTLINE</h2>
+					<p class="card-tagline">Mega Man-style action platformer · 10 sectors · 7 bosses · NG+</p>
+					<div class="card-actions">
+						<a class="play-btn" href="https://arlong6.github.io/voltline/">PLAY</a>
+					</div>
+				</div>
+			</article>
+
+			<article class="card coming-soon">
+				<div class="card-thumb thumb-coming">???</div>
+				<div class="card-body">
+					<h2 class="card-title">UNTITLED #02</h2>
+					<p class="card-tagline">Next experiment in the pipeline.</p>
+					<div class="card-actions">
+						<span class="coming-tag">COMING SOON</span>
+					</div>
+				</div>
+			</article>
+
+			<article class="card coming-soon">
+				<div class="card-thumb thumb-coming">???</div>
+				<div class="card-body">
+					<h2 class="card-title">UNTITLED #03</h2>
+					<p class="card-tagline">TBD — possibly roguelike, possibly puzzle.</p>
+					<div class="card-actions">
+						<span class="coming-tag">COMING SOON</span>
+					</div>
+				</div>
+			</article>
+
+			<article class="card coming-soon">
+				<div class="card-thumb thumb-coming">???</div>
+				<div class="card-body">
+					<h2 class="card-title">UNTITLED #04</h2>
+					<p class="card-tagline">Slot reserved.</p>
+					<div class="card-actions">
+						<span class="coming-tag">COMING SOON</span>
+					</div>
+				</div>
+			</article>
+		</main>
+
+		<footer>
+			<div>made by arlong · 2026</div>
+			<div><a href="https://github.com/Arlong6" target="_blank" rel="noopener">github</a></div>
+		</footer>
+	</div>
+</body>
+</html>
