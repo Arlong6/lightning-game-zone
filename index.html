@@ -191,6 +191,30 @@
 			letter-spacing: 8px;
 			opacity: 0.8;
 		}
+		.thumb-voltris {
+			background:
+				radial-gradient(circle at 30% 30%, rgba(255,210,74,0.22), transparent 60%),
+				radial-gradient(circle at 70% 70%, rgba(122,200,255,0.22), transparent 60%),
+				linear-gradient(135deg, #100620 0%, #1a0c2e 100%);
+		}
+		.thumb-voltris::before {
+			content: "VOLTRIS";
+			position: absolute;
+			color: #ffd24a;
+			font-size: 28px;
+			font-weight: 700;
+			letter-spacing: 6px;
+			text-shadow: 0 0 14px rgba(255,210,74,0.5);
+		}
+		.thumb-voltris::after {
+			content: "I O T S Z J L";
+			position: absolute;
+			bottom: 14px;
+			color: #c060ff;
+			font-size: 10px;
+			letter-spacing: 4px;
+			opacity: 0.8;
+		}
 		.thumb-coming {
 			background:
 				repeating-linear-gradient(
@@ -325,13 +349,13 @@
 				</div>
 			</article>
 
-			<article class="card coming-soon">
-				<div class="card-thumb thumb-coming">???</div>
+			<article class="card playable">
+				<div class="card-thumb thumb-voltris"></div>
 				<div class="card-body">
-					<h2 class="card-title">UNTITLED #04</h2>
-					<p class="card-tagline">Slot reserved.</p>
+					<h2 class="card-title">VOLTRIS</h2>
+					<p class="card-tagline">Pixel-art Tetris · SRS wall kicks · hold · ghost · 7-bag · Korobeiniki chiptune</p>
 					<div class="card-actions">
-						<span class="coming-tag">COMING SOON</span>
+						<a class="play-btn" href="https://arlong6.github.io/voltris/">PLAY</a>
 					</div>
 				</div>
 			</article>
