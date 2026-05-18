@@ -167,6 +167,30 @@
 			letter-spacing: 8px;
 			opacity: 0.85;
 		}
+		.thumb-voltbeat {
+			background:
+				radial-gradient(circle at 25% 35%, rgba(180,120,255,0.3), transparent 60%),
+				radial-gradient(circle at 75% 65%, rgba(90,220,255,0.22), transparent 60%),
+				linear-gradient(135deg, #150825 0%, #0a0420 100%);
+		}
+		.thumb-voltbeat::before {
+			content: "VOLTBEAT";
+			position: absolute;
+			color: #c89eff;
+			font-size: 26px;
+			font-weight: 700;
+			letter-spacing: 5px;
+			text-shadow: 0 0 14px rgba(200,158,255,0.6);
+		}
+		.thumb-voltbeat::after {
+			content: "D F J K";
+			position: absolute;
+			bottom: 14px;
+			color: #7adcff;
+			font-size: 11px;
+			letter-spacing: 8px;
+			opacity: 0.8;
+		}
 		.thumb-coming {
 			background:
 				repeating-linear-gradient(
@@ -290,13 +314,13 @@
 				</div>
 			</article>
 
-			<article class="card coming-soon">
-				<div class="card-thumb thumb-coming">???</div>
+			<article class="card playable">
+				<div class="card-thumb thumb-voltbeat"></div>
 				<div class="card-body">
-					<h2 class="card-title">UNTITLED #03</h2>
-					<p class="card-tagline">TBD — possibly roguelike, possibly puzzle.</p>
+					<h2 class="card-title">VOLTBEAT</h2>
+					<p class="card-tagline">4-key pixel rhythm game · procedurally synthesized chiptune · grade S to D</p>
 					<div class="card-actions">
-						<span class="coming-tag">COMING SOON</span>
+						<a class="play-btn" href="https://arlong6.github.io/voltbeat/">PLAY</a>
 					</div>
 				</div>
 			</article>
