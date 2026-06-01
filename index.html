@@ -215,6 +215,30 @@
 			letter-spacing: 4px;
 			opacity: 0.8;
 		}
+		.thumb-lexicon-village {
+			background:
+				radial-gradient(circle at 35% 40%, rgba(255,180,100,0.28), transparent 60%),
+				radial-gradient(circle at 65% 60%, rgba(180,140,80,0.2), transparent 60%),
+				linear-gradient(135deg, #1e1410 0%, #2a1a0e 100%);
+		}
+		.thumb-lexicon-village::before {
+			content: "字典村莊";
+			position: absolute;
+			color: #ffd29a;
+			font-size: 26px;
+			font-weight: 700;
+			letter-spacing: 6px;
+			text-shadow: 0 0 14px rgba(255,210,154,0.6);
+		}
+		.thumb-lexicon-village::after {
+			content: "LEXICON VILLAGE";
+			position: absolute;
+			bottom: 14px;
+			color: #d4c4a0;
+			font-size: 10px;
+			letter-spacing: 4px;
+			opacity: 0.8;
+		}
 		.thumb-coming {
 			background:
 				repeating-linear-gradient(
@@ -356,6 +380,17 @@
 					<p class="card-tagline">Pixel-art Tetris · SRS wall kicks · hold · ghost · 7-bag · Korobeiniki chiptune</p>
 					<div class="card-actions">
 						<a class="play-btn" href="https://arlong6.github.io/voltris/">PLAY</a>
+					</div>
+				</div>
+			</article>
+
+			<article class="card playable">
+				<div class="card-thumb thumb-lexicon-village"></div>
+				<div class="card-body">
+					<h2 class="card-title">字典村莊</h2>
+					<p class="card-tagline">Language-decipherment puzzle · learn a constructed language one word at a time · single sitting</p>
+					<div class="card-actions">
+						<a class="play-btn" href="https://arlong6.github.io/lexicon-village/">PLAY</a>
 					</div>
 				</div>
 			</article>
